@@ -1,21 +1,16 @@
-variable "availability_zones" {
-  description = "List of subnet availability zones."
-  type        = list(string)
-}
-
 variable "region" {
   type        = string
   description = "Region to deploy in"
   default     = "us-east-1"
 }
-
 variable "tags" {
-  type        = map(string)
-  description = "Tags to associate to the resources"
+  type        = map(any)
+  description = "Tags to apply to all resources."
 }
-
-# VPC
-
+variable "type" {
+  type        = string
+  description = "type of VPC"
+}
 variable "vpc_configs" {
   type        = map(any)
   description = "VPC configurations"
@@ -35,12 +30,7 @@ variable "endpoint_subnet_configs" {
   type        = list(any)
   description = "Public subnets configurations"
 }
-
 variable "tgw_subnet_configs" {
   type        = list(any)
   description = "Database subnets configurations"
-}
-variable "endpoint_tgw_configs" {
-    type   = list(any)
-    description ="endpoint_tgw configuration"
 }

@@ -1,5 +1,5 @@
 resource "aws_iam_role" "flowlogs" {
-  name = "flowlogs"
+  name = "flowlogs-${var.tags["ClientName"]}-${var.type}-${var.vpc_configs["vpc_name"]}-role"
   path = "/"
 
   assume_role_policy = <<POLICY
