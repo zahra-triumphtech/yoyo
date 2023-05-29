@@ -90,3 +90,74 @@ endpoint_tgw_subnet_configs = [
     az   = 2
   }
 ]
+
+#Ingress VPC
+
+# General
+region      = "us-east-1"
+tags        = {
+  "ClientName"  = "network"
+  "ManagedBy"   = "terraform"
+}
+
+# VPC
+vpc_configs = {
+  vpc_name = "Ingress vpc"
+  vpc_cidr = "10.104.2.0/23"
+}
+flowlog_retention    = 7
+flowlog_traffic_type = "ALL"
+ingress-gwlbe_configs = [
+  {
+    name = "Ingress-gwlbe 1"
+    cidr = "10.104.2.0/28"
+    az   = 0
+  },
+  {
+    name = "Ingress-gwlbe 2"
+    cidr = "10.104.2.16/28"
+    az   = 1
+  },
+  {
+    name = "Ingress-gwlbe 3"
+    cidr = "10.104.2.32/28"
+    az   = 2
+  }
+]
+
+ingress-public_configs = [
+  {
+    name = "Ingress-public 1"
+    cidr = "10.104.2.128/25"
+    az   = 0
+  },
+  {
+    name = "Ingress-public 2"
+    cidr = "10.104.3.0/25"
+    az   = 1
+  },
+  {
+    name = "Ingress-public 3"
+    cidr = "10.104.3.128/25"
+    az   = 2
+  }
+]
+
+ingress-tgw_configs = [
+  {
+    name = "Ingress-tgw 1"
+    cidr = "10.104.2.48/28"
+    az   = 0
+  },
+  {
+    name = "Ingress-tgw 2"
+    cidr = "10.104.2.64/28"
+    az   = 1
+  },
+  {
+    name = "Ingress-tgw3"
+    cidr = "10.104.2.80/28"
+    az   = 2
+  }
+]
+

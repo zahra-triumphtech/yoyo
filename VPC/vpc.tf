@@ -19,3 +19,13 @@ module "endpoint_vpc" {
   tgw_subnet_configs     = var.endpoint_tgw_subnet_configs
   tags                   = var.tags
 }
+module "ingress_vpc" {
+  source                 = "../modules/ingress-vpc"
+  type                   = "ingress"
+  vpc_configs            = var.ingress_vpc_configs
+  flowlog_retention      = var.ingress_flowlog_retention
+  flowlog_traffic_type   = var.ingress_flowlog_traffic_type
+  ingress_subnet_configs= var.ingress_subnet_configs
+  tgw_subnet_configs     = var.ingress_tgw_subnet_configs
+  tags                   = var.tags
+}
