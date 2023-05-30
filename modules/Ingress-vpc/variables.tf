@@ -26,15 +26,15 @@ variable "flowlog_traffic_type" {
   description = "Type of flowlog traffic to capture.  Valid values - ACCEPT, REJECT, ALL."
 }
 
-variable "gwlbe_configs" {
+variable "gwlbe_subnet_configs" {
   type        = list(any)
   description = "Public subnets configurations"
 }
-variable "public_configs" {
+variable "public_subnet_configs" {
   type        = list(any)
   description = "Database subnets configurations"
 }
-variable "tgw_configs" {
+variable "tgw_subnet_configs" {
   type        = list(any)
   description = "Database subnets configurations"
 }
