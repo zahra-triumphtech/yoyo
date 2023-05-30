@@ -4,15 +4,15 @@ data "aws_availability_zones" "available" {
 }
 
 # Create VPC resource
-resource "aws_vpc" "inspection-vpc" {
-  cidr_block           = var.vpc_configs["vpc_cidr"]
+resource "aws_vpc" "inspection_vpc" {
+  cidr_block           = var.inspection_vpc_configs["vpc_cidr"]
   enable_dns_support   = true
   enable_dns_hostnames = true
-  tags                 = merge(var.tags, { "Name" = "${var.tags["ClientName"]}-${var.type}-${var.vpc_configs["vpc_name"]}" })
+  tags                 = merge(var.tags, { "Name" = "${var.tags["ClientName"]}-${var.type}-${var.inspection_vpc_configs["vpc_name"]}" })
 }
 
 resource "aws_cloudwatch_log_group" "flowlogs" {
-  name              = "/aws/flowlogs/${var.tags["ClientName"]}-${var.type}-${var.vpc_configs["vpc_name"]}"
+  name              = "/aws/flowlogs/${var.tags["ClientName"]}-${var.type}-${var.inspection_vpc_configs["vpc_name"]}"
   retention_in_days = var.flowlog_retention
   tags              = var.tags
 }
@@ -20,6 +20,6 @@ resource "aws_cloudwatch_log_group" "flowlogs" {
 resource "aws_flow_log" "flowlogs" {
   log_destination = aws_cloudwatch_log_group.flowlogs.arn
   iam_role_arn    = aws_iam_role.flowlogs.arn
-  vpc_id          = aws_vpc.inspection-vpc.id
+  vpc_id          = aws_vpc.inspection_vpc.id
   traffic_type    = var.flowlog_traffic_type
 }
