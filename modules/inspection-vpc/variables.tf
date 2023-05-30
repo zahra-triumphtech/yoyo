@@ -26,27 +26,27 @@ variable "flowlog_traffic_type" {
   description = "Type of flowlog traffic to capture.  Valid values - ACCEPT, REJECT, ALL."
 }
 
-variable "inspection_mgmt_subnet_configs" {
+variable "mgmt_subnet_configs" {
   type        = list(any)
   description = "mgmt subnets configurations"
 }
-variable "inspection_public_subnet_configs" {
+variable "public_subnet_configs" {
   type        = list(any)
   description = "public subnets configurations"
 }
-variable "inspection_fw_subnet_configs" {
+variable "fw_subnet_configs" {
   type        = list(any)
   description = "fw subnets configurations"
 }
-variable "inspection_gwlb_subnet_configs" {
+variable "gwlb_subnet_configs" {
   type        = list(any)
   description = "gwlb subnets configurations"
 }
-variable "inspection_gwlbe_subnet_configs" {
+variable "gwlbe_subnet_configs" {
   type        = list(any)
   description = "gwlbe subnets configurations"
 }
-variable "inspection_tgw_subnet_configs" {
+variable "tgw_subnet_configs" {
   type        = list(any)
   description = "tgw subnets configurations"
 }
