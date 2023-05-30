@@ -99,55 +99,55 @@ ingress_vpc_configs = {
 }
 ingress_flowlog_retention    = 7
 ingress_flowlog_traffic_type = "ALL"
-ingress-gwlbe_configs = [
+ingress_gwlbe_subnet_configs = [
   {
-    name = "Ingress-gwlbe 1"
+    name = "ingress_gwlbe_subnet 1"
     cidr = "10.104.2.0/28"
     az   = 0
   },
   {
-    name = "Ingress-gwlbe 2"
+    name = "ingress_gwlbe_subnet 2"
     cidr = "10.104.2.16/28"
     az   = 1
   },
   {
-    name = "Ingress-gwlbe 3"
+    name = "ingress_gwlbe_subnet 3"
     cidr = "10.104.2.32/28"
     az   = 2
   }
 ]
 
-ingress-public_configs = [
+ingress_public_subnet_configs = [
   {
-    name = "Ingress-public 1"
+    name = "ingress_public_subnet 1"
     cidr = "10.104.2.128/25"
     az   = 0
   },
   {
-    name = "Ingress-public 2"
+    name = "ingress_public_subnet 2"
     cidr = "10.104.3.0/25"
     az   = 1
   },
   {
-    name = "Ingress-public 3"
+    name = "ingress_public_subnet 3"
     cidr = "10.104.3.128/25"
     az   = 2
   }
 ]
 
-ingress-tgw_configs = [
+ingress_tgw_subnet_configs = [
   {
-    name = "Ingress-tgw 1"
+    name = "ingress_tgw_subnet 1"
     cidr = "10.104.2.48/28"
     az   = 0
   },
   {
-    name = "Ingress-tgw 2"
+    name = "ingress_tgw_subnet 2"
     cidr = "10.104.2.64/28"
     az   = 1
   },
   {
-    name = "Ingress-tgw3"
+    name = "ingress_tgw_subnet3"
     cidr = "10.104.2.80/28"
     az   = 2
   }
