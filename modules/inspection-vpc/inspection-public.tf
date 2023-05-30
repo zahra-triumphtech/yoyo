@@ -1,10 +1,10 @@
 #Create inspection_public subnets
 resource "aws_subnet" "inspection_public_subnet" {
   for_each                           = { for inspection_public_subnet in var.inspection_public_subnet_configs : inspection_public_subnet.az => inspection_public_subnet }
-  vpc_id                             = aws_vpc.inspection-vpc.id
+  vpc_id                             = aws_vpc.inspection_vpc.id
   cidr_block                         = each.value.cidr
   availability_zone                  = data.aws_availability_zones.available.names[each.value.az]
-  map_inspection_public_ip_on_launch = true
+  map_public_ip_on_launch = true
   tags = merge(var.tags,
     {
       "Name" = "${var.tags["ClientName"]}-${var.tags["Environment"]}-${each.value.name}"
@@ -16,13 +16,13 @@ resource "aws_subnet" "inspection_public_subnet" {
 
 # Create inspection_public route table
 resource "aws_route_table" "inspection_public_route_table" {
-  vpc_id = aws_vpc.inspection-vpc.id
+  vpc_id = aws_vpc.inspection_vpc.id
   tags   = merge(var.tags, { "Name" : "${var.tags["ClientName"]}-${var.tags["Environment"]}-inspection_public-Subnet-RT" })
 }
 
 # Define Internet-GW
 resource "aws_internet_gateway" "internet_gateway" {
-  vpc_id = aws_vpc.inspection-vpc.id
+  vpc_id = aws_vpc.inspection_vpc.id
   tags = {
     Name = "iGW"
   }

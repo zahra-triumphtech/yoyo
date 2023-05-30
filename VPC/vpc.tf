@@ -1,11 +1,11 @@
 module "egress_vpc" {
   source                = "../modules/egress-vpc"
   type                  = "egress"
-  vpc_configs           = var.egress_vpc_configs
+  egress_vpc_configs    = var.egress_vpc_configs
   flowlog_retention     = var.egress_flowlog_retention
   flowlog_traffic_type  = var.egress_flowlog_traffic_type
-  public_subnet_configs = var.egress_public_subnet_configs
-  tgw_subnet_configs    = var.egress_tgw_subnet_configs
+  egress_public_subnet_configs = var.egress_public_subnet_configs
+  egress_tgw_subnet_configs    = var.egress_tgw_subnet_configs
   tags                  = var.tags
 }
 
@@ -32,10 +32,14 @@ module "ingress_vpc" {
 module "inspection_vpc" {
   source                        = "../modules/inspection-vpc"
   type                          = "inspection"
-  vpc_configs                   = var.inspection_vpc_configs
+  inspection_vpc_configs                   = var.inspection_vpc_configs
   flowlog_retention             = var.inspection_flowlog_retention
   flowlog_traffic_type          = var.inspection_flowlog_traffic_type
-  inspection_subnet_configs     = var.inspection_subnet_configs
+  inspection_mgmt_subnet_configs = var.inspection_mgmt_subnet_configs
+  inspection_public_subnet_configs = var.inspection_public_subnet_configs
+  inspection_fw_subnet_configs = var.inspection_fw_subnet_configs
+  inspection_gwlb_subnet_configs = var.inspection_gwlb_subnet_configs
+  inspection_gwlbe_subnet_configs = var.inspection_gwlbe_subnet_configs
   inspection_tgw_subnet_configs = var.inspection_tgw_subnet_configs
   tags                          = var.tags
 }

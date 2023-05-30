@@ -7,24 +7,24 @@ tags        = {
 
 # Egress VPC
 egress_vpc_configs = {
-  vpc_name = "vpc"
+  vpc_name = "Egress-VPC"
   vpc_cidr = "10.104.4.0/24"
 }
 egress_flowlog_retention    = 7
 egress_flowlog_traffic_type = "ALL"
 egress_public_subnet_configs = [
   {
-    name = "public-Subnet1"
+    name = "egress-public1"
     cidr = "10.104.4.0/28"
     az   = 0
   },
   {
-    name = "public-Subnet2"
+    name = "egress-public2"
     cidr = "10.104.4.16/28"
     az   = 1
   },
   {
-    name = "public-Subnet3"
+    name = "egress-public3"
     cidr = "10.104.4.32/28"
     az   = 2
   }
@@ -32,17 +32,17 @@ egress_public_subnet_configs = [
 
 egress_tgw_subnet_configs = [
   {
-    name = "tgw-Subnet1"
+    name = "egress-tgw1"
     cidr = "10.104.4.96/28"
     az   = 0
   },
   {
-    name = "tgw-Subnet2"
+    name = "egress-tgw2"
     cidr = "10.104.4.112/28"
     az   = 1
   },
   {
-    name = "tgw-Subnet3"
+    name = "egress-tgw3"
     cidr = "10.104.4.128/28"
     az   = 2
   }
@@ -160,8 +160,6 @@ inspection_vpc_configs = {
 }
 inspection_flowlog_retention    = 7
 inspection_flowlog_traffic_type = "ALL"
-inspection_subnet_configs = [
-
 inspection_mgmt_subnet_configs = [
   {
     name = "inspection-mgmt1"
@@ -268,5 +266,4 @@ inspection_tgw_subnet_configs = [
     cidr = "10.104.1.80/28"
     az   = 2
   }
-]
 ]

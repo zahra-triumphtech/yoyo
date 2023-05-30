@@ -11,7 +11,7 @@ variable "type" {
   type        = string
   description = "type of VPC"
 }
-variable "vpc_configs" {
+variable "inspection_vpc_configs" {
   type        = map(any)
   description = "VPC configurations"
 }
