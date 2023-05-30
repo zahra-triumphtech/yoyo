@@ -25,8 +25,9 @@ module "ingress_vpc" {
   vpc_configs            = var.ingress_vpc_configs
   flowlog_retention      = var.ingress_flowlog_retention
   flowlog_traffic_type   = var.ingress_flowlog_traffic_type
-  ingress_subnet_configs = var.ingress_subnet_configs
+  public_subnet_configs  = var.ingress_public_subnet_configs
   tgw_subnet_configs     = var.ingress_tgw_subnet_configs
+  gwlbe_subnet_configs   = var.ingress_gwlbe_subnet_configs
   tags                   = var.tags
 }
 module "inspection_vpc" {

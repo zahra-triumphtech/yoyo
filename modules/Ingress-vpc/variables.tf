@@ -26,15 +26,15 @@ variable "flowlog_traffic_type" {
   description = "Type of flowlog traffic to capture.  Valid values - ACCEPT, REJECT, ALL."
 }
 
-variable "Ingress-gwlbe_configs" {
+variable "gwlbe_configs" {
   type        = list(any)
   description = "Public subnets configurations"
 }
-variable "Ingress-public_configs" {
+variable "public_configs" {
   type        = list(any)
   description = "Database subnets configurations"
 }
-variable "Ingress-tgw_configs" {
+variable "tgw_configs" {
   type        = list(any)
   description = "Database subnets configurations"
 }
