@@ -14,8 +14,8 @@ resource "aws_subnet" "data_subnet" {
 # Create route tables for each subnet
 resource "aws_route_table" "data_route_table" {
   for_each = { for data_subnet in var.ingress_tgw_subnet_configs : data_subnet.az => data_subnet }
-  vpc_id = aws_vpc.vpc.id
-  tags   = merge(var.tags, { "Name" : "${var.tags["ClientName"]}-${var.type}-tgw-subnet-RT" })
+  vpc_id   = aws_vpc.vpc.id
+  tags     = merge(var.tags, { "Name" : "${var.tags["ClientName"]}-${var.type}-tgw-subnet-RT" })
 }
 
 # Route Association of data subnet with data route table

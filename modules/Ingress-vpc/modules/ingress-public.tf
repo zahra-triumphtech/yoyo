@@ -1,19 +1,19 @@
 #Create public subnets
- resource "aws_subnet" "ingress_public_subnet" {
-   for_each                = { for ingress_public_subnet in var.ingress_public_subnet_configs : ingress_public_subnet.az => ingress_public_subnet }
-   vpc_id                  = aws_vpc.vpc.id
-   cidr_block              = each.value.cidr
-   availability_zone       = data.aws_availability_zones.available.names[each.value.az]
-   map_public_ip_on_launch = true
-   tags = merge(var.tags,
-     {
-       "Name" = "${var.tags["ClientName"]}-${var.type}-${each.value.name}"
-       "Tier" = "public"
-     }
+resource "aws_subnet" "ingress_public_subnet" {
+  for_each                = { for ingress_public_subnet in var.ingress_public_subnet_configs : ingress_public_subnet.az => ingress_public_subnet }
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = each.value.cidr
+  availability_zone       = data.aws_availability_zones.available.names[each.value.az]
+  map_public_ip_on_launch = true
+  tags = merge(var.tags,
+    {
+      "Name" = "${var.tags["ClientName"]}-${var.type}-${each.value.name}"
+      "Tier" = "public"
+    }
 
-   )
+  )
 }
- 
+
 # Create public route table
 resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.vpc.id
@@ -24,8 +24,8 @@ resource "aws_route_table" "public_route_table" {
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.vpc.id
   tags = {
-     Name = "iGW"
-   }
+    Name = "iGW"
+  }
 }
 
 # Create route in public route table
@@ -45,7 +45,7 @@ resource "aws_route_table_association" "ingress_public_subnet_route_table_associ
 #create Elastic IP
 resource "aws_eip" "eip_nat" {
   for_each = { for ingress_public_subnet in var.ingress_public_subnet_configs : ingress_public_subnet.az => ingress_public_subnet }
-#  vpc      = true
+  #  vpc      = true
 }
 #create NAT gateway
 resource "aws_nat_gateway" "nat_gw" {

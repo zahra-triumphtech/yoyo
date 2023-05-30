@@ -93,20 +93,12 @@ endpoint_tgw_subnet_configs = [
 
 #Ingress VPC
 
-# General
-region      = "us-east-1"
-tags        = {
-  "ClientName"  = "network"
-  "ManagedBy"   = "terraform"
-}
-
-# VPC
-vpc_configs = {
+ingress_vpc_configs = {
   vpc_name = "Ingress vpc"
   vpc_cidr = "10.104.2.0/23"
 }
-flowlog_retention    = 7
-flowlog_traffic_type = "ALL"
+ingress_flowlog_retention    = 7
+ingress_flowlog_traffic_type = "ALL"
 ingress-gwlbe_configs = [
   {
     name = "Ingress-gwlbe 1"
@@ -161,3 +153,120 @@ ingress-tgw_configs = [
   }
 ]
 
+# Inspection VPC
+inspection_vpc_configs = {
+  vpc_name = "inspection-vpc"
+  vpc_cidr = "10.104.0.0/23"
+}
+inspection_flowlog_retention    = 7
+inspection_flowlog_traffic_type = "ALL"
+inspection_subnet_configs = [
+
+inspection_mgmt_subnet_configs = [
+  {
+    name = "inspection-mgmt1"
+    cidr = "10.104.0.0/28"
+    az   = 0
+  },
+  {
+    name = "inspection-mgmt2"
+    cidr = "10.104.0.16/28"
+    az   = 1
+  },
+  {
+    name = "inspection-mgmt3"
+    cidr = "10.104.0.32/28"
+    az   = 2
+  }
+]
+inspection_public_subnet_configs = [
+  {
+    name = "inspection-public1"
+    cidr = "10.104.0.48/28"
+    az   = 0
+  },
+  {
+    name = "inspection-public2"
+    cidr = "10.104.0.64/28"
+    az   = 1
+  },
+  {
+    name = "inspection-public3"
+    cidr = "10.104.0.80/28"
+    az   = 2
+  }
+]
+
+inspection_fw_subnet_configs = [
+  {
+    name = "inspection-fw1"
+    cidr = "10.104.0.96/28"
+    az   = 0
+  },
+  {
+    name = "inspection-fw2"
+    cidr = "10.104.0.112/28"
+    az   = 1
+  },
+  {
+    name = "inspection-fw3"
+    cidr = "10.104.0.128/28"
+    az   = 2
+  }
+]
+
+
+inspection_gwlb_subnet_configs = [
+  {
+    name = "inspection-gwlb1"
+    cidr = "10.104.0.160/27"
+    az   = 0
+  },
+  {
+    name = "inspection-gwlb2"
+    cidr = "10.104.0.192/27"
+    az   = 1
+  },
+  {
+    name = "inspection-gwlb3"
+    cidr = "10.104.0.224/27"
+    az   = 2
+  }
+]
+
+inspection_gwlbe_subnet_configs = [
+  {
+    name = "inspection-gwlbe1"
+    cidr = "10.104.1.0/28"
+    az   = 0
+  },
+  {
+    name = "inspection-gwlbe2"
+    cidr = "10.104.1.16/28"
+    az   = 1
+  },
+  {
+    name = "inspection-gwlbe3"
+    cidr = "10.104.1.32/28"
+    az   = 2
+  }
+]
+
+inspection_tgw_subnet_configs = [
+  {
+    name = "inspection-tgw1"
+    cidr = "10.104.1.48/28"
+    az   = 0
+  },
+  {
+    name = "inspection-tgw2"
+    cidr = "10.104.1.64/28"
+    az   = 1
+  },
+  {
+    name = "inspection-tgw3"
+    cidr = "10.104.1.80/28"
+    az   = 2
+  }
+]
+]
