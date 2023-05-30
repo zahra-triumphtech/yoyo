@@ -94,7 +94,7 @@ endpoint_tgw_subnet_configs = [
 #Ingress VPC
 
 ingress_vpc_configs = {
-  vpc_name = "Ingress vpc"
+  vpc_name = "vpc"
   vpc_cidr = "10.104.2.0/23"
 }
 ingress_flowlog_retention    = 7
@@ -160,7 +160,7 @@ inspection_vpc_configs = {
 }
 inspection_flowlog_retention    = 7
 inspection_flowlog_traffic_type = "ALL"
-inspection_subnet_configs = [
+inspection_subnet_configs = []
 
 inspection_mgmt_subnet_configs = [
   {
@@ -268,5 +268,4 @@ inspection_tgw_subnet_configs = [
     cidr = "10.104.1.80/28"
     az   = 2
   }
-]
 ]
