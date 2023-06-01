@@ -40,12 +40,12 @@ module "inspection_vpc" {
   inspection_tgw_subnet_configs = var.inspection_tgw_subnet_configs
   tags                          = var.tags
 }
-# # module "transit_gateway" {
-# #   source = "../modules/transit_gateway"
+module "transit_gateway" {
+  source = "../modules/transit-gateway"
 
 
-#   transit_gateway_description = var.transit_gateway_description
-#   transit_gateway_share_name  = var.transit_gateway_share_name
-#   vpc_attachments             = var.vpc_attachments
-#   shared_account_ids          = var.shared_account_ids
-# }
+  transit_gateway_description = var.transit_gateway_description
+  transit_gateway_share_name  = var.transit_gateway_share_name
+  vpc_attachments             = var.vpc_attachments
+  shared_account_ids          = var.shared_account_ids
+}
