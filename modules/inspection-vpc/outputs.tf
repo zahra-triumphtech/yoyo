@@ -1,6 +1,6 @@
-# output "vpc_id" {
-#   value = aws_vpc.vpc.id
-# }
+output "vpc_id" {
+  value = aws_vpc.inspection_vpc.id
+}
 
 # # Private subnets
 
@@ -11,10 +11,11 @@
 
 # # Data subnets
 
-# output "tgw_subnet_ids" {
-#   value       = [for k, v in aws_subnet.data_subnet : v.id]
-#   description = "Data subnet IDs"
-# }
+output "tgw_subnet_ids" {
+  value       = [for k, v in aws_subnet.inspection_tgw_subnet : v.id]
+  description = "Data subnet IDs"
+}
+
 # # Public Subnets
 
 # output "public_subnet_ids" {

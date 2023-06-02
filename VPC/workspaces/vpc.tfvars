@@ -267,4 +267,3 @@ inspection_tgw_subnet_configs = [
     az   = 2
   }
 ]
-

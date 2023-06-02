@@ -44,3 +44,22 @@ module "inspection_vpc" {
   tgw_subnet_configs     = var.inspection_tgw_subnet_configs
   tags                   = var.tags
 }
+module "transit_gateway" {
+  source = "../modules/transit-gateway"
+  egress_vpc_attachment = module.egress_vpc.vpc_id
+  egress_subnet_attachment = module.egress_vpc.tgw_subnet_ids
+
+  ingress_vpc_attachment = module.ingress_vpc.vpc_id
+  ingress_subnet_attachment = module.ingress_vpc.tgw_subnet_ids
+  
+  endpoint_vpc_attachment = module.endpoint_vpc.vpc_id
+  endpoint_subnet_attachment = module.endpoint_vpc.tgw_subnet_ids
+  
+  inspection_vpc_attachment = module.inspection_vpc.vpc_id
+  inspection_subnet_attachment = module.inspection_vpc.tgw_subnet_ids
+
+  # transit_gateway_description = var.transit_gateway_description
+  # transit_gateway_share_name  = var.transit_gateway_share_name
+  # vpc_attachments             = var.vpc_attachments
+  # shared_account_ids          = var.shared_account_ids
+}
