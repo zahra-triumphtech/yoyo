@@ -1,3 +1,12 @@
+variable "vpc_ids" {
+  description = "list of vpc ids"
+  type        = list(any)
+}
+variable "subnet_ids" {
+  description = "list of subnet ids"
+  type        = list(any)
+}
+
 variable "egress_vpc_attachment" {
   description = "egress vpc tgw attachment"
   type        = string  
@@ -33,7 +42,7 @@ variable "inspection_subnet_attachment" {
   type        = list(any) 
 }
 
-
+################################################################################################
 # variable "transit_gateway_description" {
 #   description = "Description for the Transit Gateway"
 #   type        = string

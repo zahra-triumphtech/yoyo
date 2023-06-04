@@ -5,7 +5,7 @@ resource "aws_ec2_transit_gateway" "transit_gateway" {
   default_route_table_association = "disable"
   default_route_table_propagation = "disable"
     tags = {
-    Name = "trans-gateway"
+    Name = "transit-gateway"
   }
 }
 
@@ -47,57 +47,57 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "inspection_attachment" {
 }
 
 ###################################################################################################
-# # Create Transit Gateway Route Tables
-resource "aws_ec2_transit_gateway_route_table" "egress_route_table" {
+# # Create Transit Gateway Route Table
+resource "aws_ec2_transit_gateway_route_table" "tgw_route_table" {
   transit_gateway_id = aws_ec2_transit_gateway.transit_gateway.id
   tags = {
-    Name = "Egress-RouteTable"
-  }
-}
-resource "aws_ec2_transit_gateway_route_table" "ingress_route_table" {
-  transit_gateway_id = aws_ec2_transit_gateway.transit_gateway.id
-  tags = {
-    Name = "Ingress-RouteTable"
-  }
-}
-resource "aws_ec2_transit_gateway_route_table" "endpoint_route_table" {
-  transit_gateway_id = aws_ec2_transit_gateway.transit_gateway.id
-  tags = {
-    Name = "Endpoint-RouteTable"
-  }
-}
-resource "aws_ec2_transit_gateway_route_table" "inspection_route_table" {
-  transit_gateway_id = aws_ec2_transit_gateway.transit_gateway.id
-  tags = {
-    Name = "Inspection-RouteTable"
+    Name = "Tgw-RouteTable"
   }
 }
 
 # Associate Transit Gateway Route Tables
 resource "aws_ec2_transit_gateway_route_table_association" "egress_association" {
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.egress_route_table.id
+  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.tgw_route_table.id
   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.egress_attachment.id
 }
 resource "aws_ec2_transit_gateway_route_table_association" "ingress_association" {
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.ingress_route_table.id
+  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.tgw_route_table.id
   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.ingress_attachment.id
 }
 resource "aws_ec2_transit_gateway_route_table_association" "endpoint_association" {
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.endpoint_route_table.id
+  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.tgw_route_table.id
   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.endpoint_attachment.id
 }
 resource "aws_ec2_transit_gateway_route_table_association" "inspection_association" {
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.inspection_route_table.id
+  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.tgw_route_table.id
   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.inspection_attachment.id
 }
 
 # Create Transit Gateway Routes
 resource "aws_ec2_transit_gateway_route" "egress_route" {
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.egress_route_table.id
-  destination_cidr_block         = "0.0.0.0/0"
+  for_each          = { for inspection_tgw_subnet in var.tgw_subnet_configs : inspection_tgw_subnet.az => inspection_tgw_subnet }
+  destination_cidr_block         = each.value.cidr
+  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.tgw_route_table.id
   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.egress_attachment.id
 }
+# resource "aws_ec2_transit_gateway_route" "ingress_route" {
+#   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.tgw_route_table.id
+#   destination_cidr_block         = "0.0.0.0/0"
+#   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.ingress_attachment.id
+# }
+# resource "aws_ec2_transit_gateway_route" "endpoint_route" {
+#   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.tgw_route_table.id
+#   destination_cidr_block         = "0.0.0.0/0"
+#   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.endpoint_attachment.id
+# }
+# resource "aws_ec2_transit_gateway_route" "inspection_route" {
+#   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.tgw_route_table.id
+#   destination_cidr_block         = "0.0.0.0/0"
+#   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.inspection_attachment.id
+# }
 
+
+############################################################################################
 # resource "aws_ec2_transit_gateway_route" "blackhole_route1" {
 #   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.app_route_table.id
 #   destination_cidr_block         = "192.168.0.0/16"
