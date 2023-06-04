@@ -46,6 +46,9 @@ module "inspection_vpc" {
 }
 module "transit_gateway" {
   source = "../modules/transit-gateway"
+  vpc_ids = [module.egress_vpc.vpc_id, module.ingress_vpc.vpc_id, module.endpoint_vpc.vpc_id, module.inspection_vpc.vpc_id]
+  subnet_ids = [module.egress_vpc.tgw_subnet_ids, module.ingress_vpc.tgw_subnet_ids, module.endpoint_vpc.tgw_subnet_ids, module.inspection_vpc.tgw_subnet_ids]
+  
   egress_vpc_attachment = module.egress_vpc.vpc_id
   egress_subnet_attachment = module.egress_vpc.tgw_subnet_ids
 
